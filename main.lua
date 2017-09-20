@@ -12,3 +12,7 @@ end
 function love.draw()
     player:draw()
 end
+
+function love.keyPressed(key)
+    player:keyPressed(key)
+end
