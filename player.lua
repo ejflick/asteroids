@@ -1,3 +1,4 @@
+--! file: player.lua
 Player = Object:extend()
 
 turnSpeed = math.pi
@@ -51,6 +52,10 @@ end
 
 function Player:draw()
     love.graphics.draw(self.image, self.x, self.y,self.orientation, self.scale, self.scale, self.width, self.height)
+end
 
-    --check if we need to wrap around
+function Player:keyPressed(key)
+    if key == "space" then
+        table.insert(listOfBullets, Bullet(self.x, self.y, self.orientation))
+    end
 end
