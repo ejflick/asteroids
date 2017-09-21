@@ -8,14 +8,14 @@ function Player:new()
     self.image = love.graphics.newImage("images/ship.png")
 
     --Center in screen
-    self.x = 400
-    self.y = 300
+    self.x = screenWidth / 2
+    self.y = screenHeight / 2
 
     self.scale = 0.5
     self.width = self.image:getWidth() * self.scale
     self.height = self.image:getHeight() * self.scale
 
-    self.orientation = 0 
+    self.orientation = math.rad(270) 
 end
 
 function Player:update(dt)
@@ -37,14 +37,14 @@ function Player:update(dt)
 
     -- Remain in bounds
     if self.x < 0 then
-        self.x = love.graphics.getWidth()
-    elseif self.x > love.graphics.getWidth() then
+        self.x = screenWidth
+    elseif self.x > screenWidth then
         self.x = 0
     end
 
     if self.y < 0 then
-        self.y = love.graphics.getHeight()
-    elseif self.y > love.graphics.getHeight() then
+        self.y = screenHeight
+    elseif self.y > screenHeight then
         self.y = 0
     end
 
@@ -55,7 +55,7 @@ function Player:draw()
 end
 
 function Player:keyPressed(key)
-    if key == "space" then
+    if key == "space" and #listOfBullets < 3 then
         table.insert(listOfBullets, Bullet(self.x, self.y, self.orientation))
     end
 end
