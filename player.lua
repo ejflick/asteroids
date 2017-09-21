@@ -27,21 +27,30 @@ function Player:update(dt)
     end
     
     if love.keyboard.isDown("w") then
-        --self.y = self.y + math.tan(self.orientati
         self.x = self.x + math.cos(self.orientation) * moveSpeed * dt
         self.y = self.y + math.sin(self.orientation) * moveSpeed * dt
     elseif love.keyboard.isDown("s") then
         self.x = self.x - math.cos(self.orientation) * moveSpeed * dt
         self.y = self.y - math.sin(self.orientation) * moveSpeed * dt
     end
+
+    -- Remain in bounds
+    if self.x < 0 then
+        self.x = love.graphics.getWidth()
+    elseif self.x > love.graphics.getWidth() then
+        self.x = 0
+    end
+
+    if self.y < 0 then
+        self.y = love.graphics.getHeight()
+    elseif self.y > love.graphics.getHeight() then
+        self.y = 0
+    end
+
 end
 
 function Player:draw()
     love.graphics.draw(self.image, self.x, self.y,self.orientation, self.scale, self.scale, self.width, self.height)
-end
 
-function Player:accelerate()
-end
-
-function Player:deccelerate()
+    --check if we need to wrap around
 end
